@@ -9,13 +9,13 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // get database connection
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/Parque.php';
+include_once '../objects/Tipo_de_foto.php';
 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
   
-$parques = new Parques($db);
+$parques = new Tipo_de_foto($db);
   
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
@@ -23,23 +23,17 @@ $data = json_decode(file_get_contents("php://input"));
 // make sure data is not empty
 if( 
   
-    !empty($data->PQ_Nombre) &&
-    !empty($data->PQ_Descripcion) &&
-    !empty($data->ID_Distrito) &&
-    !empty($data->PQ_Direccion) &&
-    !empty($data->PQ_Latitud) &&
-    !empty($data->PQ_Longitud) 
+    !empty($data->TFL_Descripcion) &&
+    !empty($data->TFL_Tamaño) &&
+    !empty($data->TFL_Detalles)
  
 ){
   
     // set product property values
 
-    $parques->PQ_Nombre = $data->PQ_Nombre;
-    $parques->PQ_Descripcion = $data->PQ_Descripcion;
-    $parques->ID_Distrito = $data->ID_Distrito;
-    $parques->PQ_Direccion = $data->PQ_Direccion;
-    $parques->PQ_Latitud = $data->PQ_Latitud;
-    $parques->PQ_Longitud = $data->PQ_Longitud;
+    $parques->TFL_Descripcion = $data->TFL_Descripcion;
+    $parques->TFL_Tamaño = $data->TFL_Tamaño;
+    $parques->TFL_Detalles = $data->TFL_Detalles;
 
 
 
@@ -50,7 +44,7 @@ if(
         http_response_code(201);
   
         // tell the user
-        echo json_encode(array("message" => "Parque creado correctamente."));
+        echo json_encode(array("message" => "Tipo_de_foto creado correctamente."));
     }
   
     // if unable to create the product, tell the user

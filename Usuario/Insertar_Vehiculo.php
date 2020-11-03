@@ -28,7 +28,7 @@ if(
     !empty($data->VEH_Modelo) &&
     !empty($data->VEH_Marca) &&
     !empty($data->ID_Tipo_Vehiculo) &&
-    !empty($data->ID_Conductor) &&
+    !empty($data->ID_Conductor)
  
 ){
   
