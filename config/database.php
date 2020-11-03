@@ -3,7 +3,7 @@ class Database{
   
     // Poner su propio database
     private $host = "127.0.0.1";
-    private $db_name = "smartcity";
+    private $db_name = "smartcityhyo_smartcitybd";
     private $username = "root";
     private $password = "";
     public $conn;
