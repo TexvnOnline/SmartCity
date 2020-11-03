@@ -40,9 +40,11 @@ class Tipo_incidente{
 
 function read(){
     $query = "SELECT
-        p.ID_Tipo_Ind, p.TIN_Nombre, p.TIN_Descripcion
-        FROM
-            " . $this->table_name . " p";
+        p.ID_Tipo_Ind, 
+        p.TIN_Nombre,
+        p.TIN_Descripcion
+        ";
+
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
     return $stmt;
