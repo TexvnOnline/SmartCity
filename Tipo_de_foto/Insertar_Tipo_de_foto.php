@@ -15,7 +15,7 @@ include_once '../objects/Tipo_de_foto.php';
 $database = new Database();
 $db = $database->getConnection();
   
-$parques = new Tipo_de_foto($db);
+$tipo_de_foto = new Tipo_de_foto($db);
   
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
@@ -24,21 +24,21 @@ $data = json_decode(file_get_contents("php://input"));
 if( 
   
     !empty($data->TFL_Descripcion) &&
-    !empty($data->TFL_Tamaño) &&
+    !empty($data->TFL_Tamano) &&
     !empty($data->TFL_Detalles)
  
 ){
   
     // set product property values
 
-    $parques->TFL_Descripcion = $data->TFL_Descripcion;
-    $parques->TFL_Tamaño = $data->TFL_Tamaño;
-    $parques->TFL_Detalles = $data->TFL_Detalles;
+    $tipo_de_foto->TFL_Descripcion = $data->TFL_Descripcion;
+    $tipo_de_foto->TFL_Tamano = $data->TFL_Tamano;
+    $tipo_de_foto->TFL_Detalles = $data->TFL_Detalles;
 
 
 
     // create the product
-    if($parques->create()){
+    if($tipo_de_foto->create()){
   
         // set response code - 201 created
         http_response_code(201);

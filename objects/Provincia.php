@@ -37,5 +37,32 @@ class Provincia{
         return $stmt;
     }
 
+    function update(){
+        $query = "UPDATE
+                    " . $this->table_name . "
+                SET 
+                PROV_Nombre = :PROV_Nombre
+                WHERE
+                    ID_Provincia = :ID_Provincia";
+                    
+                    
+        // prepare query
+        $stmt = $this->conn->prepare($query);
+      
+        // sanitize
+        $this->ID_Provincia=htmlspecialchars(strip_tags($this->ID_Provincia));
+        $this->PROV_Nombre=htmlspecialchars(strip_tags($this->PROV_Nombre));
+        // bind values
+        $stmt->bindParam(":ID_Provincia", $this->ID_Provincia);
+        $stmt->bindParam(":PROV_Nombre", $this->PROV_Nombre);
+        // execute query
+    
+        if($stmt->execute()){
+            return true;
+        }
+        
+        return false;
+    }
+
 }
 ?>

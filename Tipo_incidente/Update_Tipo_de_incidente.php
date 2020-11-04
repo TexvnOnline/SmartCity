@@ -8,32 +8,30 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
   
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/Tipo_de_foto.php';
+include_once '../objects/Tipo_incidente.php';
   
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
   
 // prepare product object
-$lugart = new Tipo_de_foto($db);
+$tipo_incidente = new Tipo_incidente($db);
   
 // get id of product to be edited
 $data = json_decode(file_get_contents("php://input"));
 
-if(  !empty($data->ID_Tipo_Fotografia) &&
-    !empty($data->TFL_Descripcion) &&
-    !empty($data->TFL_Tamano) &&
-    !empty($data->TFL_Detalles) 
+if(  !empty($data->ID_Tipo_Ind) &&
+    !empty($data->TIN_Nombre) &&
+    !empty($data->TIN_Descripcion) 
 ){
 	// set ID property of product to be edited
-	$lugart->ID_Tipo_Fotografia = $data->ID_Tipo_Fotografia;
+	$tipo_incidente->ID_Tipo_Ind = $data->ID_Tipo_Ind;
 	  
 	// set product property values
-	$lugart->TFL_Descripcion = $data->TFL_Descripcion;
-    $lugart->TFL_Tamano = $data->TFL_Tamano;
-    $lugart->TFL_Detalles = $data->TFL_Detalles;
+	$tipo_incidente->TIN_Nombre = $data->TIN_Nombre;
+    $tipo_incidente->TIN_Descripcion = $data->TIN_Descripcion;
 	// update the product
-	if($lugart->update()){
+	if($tipo_incidente->update()){
 	  
 	    // set response code - 200 ok
 	    http_response_code(200);
@@ -49,7 +47,7 @@ if(  !empty($data->ID_Tipo_Fotografia) &&
 	    http_response_code(503);
 	  
 	    // tell the user
-	    echo json_encode(array("message" => "No se pudo actualizar el tipo de fotografia"));
+	    echo json_encode(array("message" => "No se pudo actualizar el tipo de indicente"));
 	}
 }else{
 	http_response_code(404);

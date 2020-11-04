@@ -5,48 +5,53 @@ class Tipo_de_foto{
 
     public $ID_Tipo_Fotografia;
     public $TFL_Descripcion	;
-    public $TFL_Tamaño;
+    public $TFL_Tamano;
     public $TFL_Detalles;
     
+    	
+	
+	
+
        
 
     public function __construct($db){
         $this->conn = $db;
     }
+
     function create(){
   
-    $query = "INSERT INTO
-            " . $this->table_name . "
-        SET TFL_Descripcion=:TFL_Descripcion, TFL_Tamaño=:TFL_Tamaño, 
-        TFL_Detalles=:TFL_Detalles";
-
-    $stmt = $this->conn->prepare($query);    
-  
-    $this->TFL_Descripcion=htmlspecialchars(strip_tags($this->TFL_Descripcion));
-    $this->TFL_Tamaño=htmlspecialchars(strip_tags($this->TFL_Tamaño));
-    $this->TFL_Detalles=htmlspecialchars(strip_tags($this->TFL_Detalles));
-
-
-
-    $stmt->bindParam(":TFL_Descripcion", $this->TFL_Descripcion);
-    $stmt->bindParam(":TFL_Tamaño", $this->TFL_Tamaño);
-    $stmt->bindParam(":TFL_Detalles", $this->TFL_Detalles);
-
-
-    if($stmt->execute()){
-        return true;
-    }
-
-    return false;
+        $query = "INSERT INTO
+                    " . $this->table_name . "
+                SET 
+                TFL_Descripcion=:TFL_Descripcion, 
+                TFL_Tamano=:TFL_Tamano, 
+                TFL_Detalles=:TFL_Detalles";
+    
+        $stmt = $this->conn->prepare($query);
       
-}
+        $this->TFL_Descripcion=htmlspecialchars(strip_tags($this->TFL_Descripcion));
+        $this->TFL_Tamano=htmlspecialchars(strip_tags($this->TFL_Tamano));
+        $this->TFL_Detalles=htmlspecialchars(strip_tags($this->TFL_Detalles));
+    
+    
+        $stmt->bindParam(":TFL_Descripcion", $this->TFL_Descripcion);
+        $stmt->bindParam(":TFL_Tamano", $this->TFL_Tamano);
+        $stmt->bindParam(":TFL_Detalles", $this->TFL_Detalles);
+    
+        if($stmt->execute()){
+            return true;
+        }
+    
+        return false;
+          
+    }
 
 
 function read(){
     $query = "SELECT
         p.ID_Tipo_Fotografia,
         p.TFL_Descripcion,
-        p.TFL_Tamaño,
+        p.TFL_Tamano,
         p.TFL_Detalles
 
         FROM
@@ -80,7 +85,7 @@ function delete(){
                 " . $this->table_name . "
             SET 
             TFL_Descripcion = :TFL_Descripcion, 
-            TFL_Tamaño = :TFL_Tamaño, 
+            TFL_Tamano = :TFL_Tamano, 
             TFL_Detalles = :TFL_Detalles
             WHERE
                 ID_Tipo_Fotografia = :ID_Tipo_Fotografia";
@@ -91,12 +96,12 @@ function delete(){
     // sanitize
     $this->ID_Tipo_Fotografia=htmlspecialchars(strip_tags($this->ID_Tipo_Fotografia));
     $this->TFL_Descripcion=htmlspecialchars(strip_tags($this->TFL_Descripcion));
-    $this->TFL_Tamaño=htmlspecialchars(strip_tags($this->TFL_Tamaño));
+    $this->TFL_Tamano=htmlspecialchars(strip_tags($this->TFL_Tamano));
     $this->TFL_Detalles=htmlspecialchars(strip_tags($this->TFL_Detalles));
     // bind values
     $stmt->bindParam(":ID_Tipo_Fotografia", $this->ID_Tipo_Fotografia);
     $stmt->bindParam(":TFL_Descripcion", $this->TFL_Descripcion);
-    $stmt->bindParam(":TFL_Tamaño", $this->TFL_Tamaño);
+    $stmt->bindParam(":TFL_Tamano", $this->TFL_Tamano);
     $stmt->bindParam(":TFL_Detalles", $this->TFL_Detalles);
     // execute query
 
